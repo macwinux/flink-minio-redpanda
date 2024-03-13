@@ -1,0 +1,43 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.177.0/containers/java-8
+{
+	"name": "flink-rp-minio",
+	//"build": {
+	//	"dockerfile": "Dockerfile",
+	//	"args": {
+	//		"INSTALL_MAVEN": "true",
+	//		"INSTALL_GRADLE": "false",
+	//		"INSTALL_NODE": "false",
+	//		"NODE_VERSION": "lts/*"
+	//	}
+	//},
+	"dockerComposeFile": "docker-compose.yaml",	
+	"service": "flink",
+	"workspaceFolder": "/workspaces",
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "sh",
+		"java.home": "/docker-java-home",
+		"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current",
+		"java.configuration.runtimes": [{
+			"default": true,
+			"name": "JavaSE-1.8",
+			"path": "/usr/local/sdkman/candidates/java/current"
+		}]
+	},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"vscjava.vscode-java-pack",
+		"redhat.vscode-xml"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8081],
+	"overrideCommand": true,
+	// Use 'postCreateCommand' to run commands after the container is created.
+	 //"postCreateCommand": "./flink-1.17.2/bin/start-cluster.sh",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
