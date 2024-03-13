@@ -10,6 +10,8 @@ There are some things that you need to do before run a flink program.
 
     `./../opt/flink/bin/start-cluster.sh`
 
+    `exit`
+
 3.  In the minio dashboard (localhost:9001), enter with user `minio` and pass `minio123`.
 4.  Create a bucket named `example`.
 5.  Upload the example-rows.txt into it.
