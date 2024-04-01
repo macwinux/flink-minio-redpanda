@@ -2,21 +2,22 @@ package com.flinkexample.flink.sourceandsink;
 
 import org.apache.flink.connector.kafka.sink.KafkaRecordSerializationSchema;
 import org.apache.flink.connector.kafka.sink.KafkaSink;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.flink.formats.json.JsonSerializationSchema;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
 
 public class Producers {
 
 
     
-    public static KafkaSink<String> createStringProducerForTopic(String topic, String kafkaAddress) {
+	public static KafkaSink<JsonNode> createStringProducerForTopic(String topic, String kafkaAddress) {
+		JsonSerializationSchema<JsonNode> jsonFormat=new JsonSerializationSchema<>();
    	 return KafkaSink
-   		     .<String>builder()
+   		     .<JsonNode>builder()
    		     .setBootstrapServers(kafkaAddress)
-   		     
    		     .setRecordSerializer(KafkaRecordSerializationSchema
    		    		 						.builder()
    		    		 						.setTopic(topic)
-   		    		 						.setKafkaValueSerializer(StringSerializer.class)
+   		    		 						.setValueSerializationSchema(jsonFormat)
    		     								.build())
    		     .build(); 
     }
